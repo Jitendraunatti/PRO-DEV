@@ -1,5 +1,97 @@
-<!DOCTYPE html>
+<!DOCTYPE html
 <html>
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.bgimg {
+  background-image: url('https://images.unsplash.com/photo-1500622944204-b135684e99fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bmF0dXJhbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60');
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 25px;
+}
+
+.topleft {
+  position: absolute;
+  top: 0;
+  left: 16px;
+}
+
+.bottomleft {
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+}
+
+.middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+hr {
+  margin: auto;
+  width: 40%;
+}
+</style>
+<body>
+
+<div class="bgimg">
+  <div class="topleft">
+    <p></p>
+  </div>
+  <div class="middle">
+    <h1>COMING SOON</h1>
+    <hr>
+    <p id="demo" style="font-size:30px"></p>
+  </div>
+  <div class="bottomleft">
+    <p>SOMETHING BIG BIG COMING SOON BY MY 'JITENDRA_PRO_DEV' SIDE</p>
+  </div>
+</div>
+
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("FEB 14, 2023 23:37:25").getTime();
+
+// Update the count down every 1 second
+var countdownfunction = setInterval(function() {
+
+  // Get todays date and time
+  var now = new Date().getTime();
+  
+  // Find the distance between now an the count down date
+  var distance = countDownDate - now;
+  
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+  // Output the result in an element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+  
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(countdownfunction);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
+
+</body>
+</html>
+
 <head>
 <style>
 body {
@@ -17,7 +109,8 @@ body {
     <center>
         <body>
             <div id="jtvh1">
-             <a class="buttoncss" href="https://instagram.com/jitendra_pro_dev""><h2> FOLLOW ON ME SOCIAL HANDLE  </h2></a><br> 
+             <a class="buttoncss" href="https://instagram.com/jitendra_pro_dev""><h2> FOLLOW ON ME SOCIAL HANDLE  </h2></a><br>
+              
              <br><a href="https://www.facebook.com/jitendra.rock.9250"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa_fgSao1QTHWhinnbmB8WWwC3wy2brMiCXmpadjjjdw&s" height="90" width="170"></a>
              <a href="https://instagram.com/jitendra_pro_dev"><img src="https://cdn.images.express.co.uk/img/dynamic/59/590x/Instagram-logo-1011468.jpg?r=1535748410906" height="90" width="170"></a>
              </div>
@@ -25,9 +118,99 @@ body {
              </a>
          </body>
         <center>
+            <body>
+
+                <canvas id="canvas" width="400" height="400"
+                style="https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80">
+                </canvas>
+                
+                <script>
+                var canvas = document.getElementById("canvas");
+                var ctx = canvas.getContext("2d");
+                var radius = canvas.height / 2;
+                ctx.translate(radius, radius);
+                radius = radius * 0.90
+                setInterval(drawClock, 1000);
+                
+                function drawClock() {
+                  drawFace(ctx, radius);
+                  drawNumbers(ctx, radius);
+                  drawTime(ctx, radius);
+                }
+                
+                function drawFace(ctx, radius) {
+                  var grad;
+                  ctx.beginPath();
+                  ctx.arc(0, 0, radius, 0, 2*Math.PI);
+                  ctx.fillStyle = 'white';
+                  ctx.fill();
+                  grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
+                  grad.addColorStop(0, '#333');
+                  grad.addColorStop(0.5, 'white');
+                  grad.addColorStop(1, '#333');
+                  ctx.strokeStyle = grad;
+                  ctx.lineWidth = radius*0.1;
+                  ctx.stroke();
+                  ctx.beginPath();
+                  ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
+                  ctx.fillStyle = '#333';
+                  ctx.fill();
+                }
+                
+                function drawNumbers(ctx, radius) {
+                  var ang;
+                  var num;
+                  ctx.font = radius*0.15 + "px arial";
+                  ctx.textBaseline="middle";
+                  ctx.textAlign="center";
+                  for(num = 1; num < 13; num++){
+                    ang = num * Math.PI / 6;
+                    ctx.rotate(ang);
+                    ctx.translate(0, -radius*0.85);
+                    ctx.rotate(-ang);
+                    ctx.fillText(num.toString(), 0, 0);
+                    ctx.rotate(ang);
+                    ctx.translate(0, radius*0.85);
+                    ctx.rotate(-ang);
+                  }
+                }
+                
+                function drawTime(ctx, radius){
+                    var now = new Date();
+                    var hour = now.getHours();
+                    var minute = now.getMinutes();
+                    var second = now.getSeconds();
+                    //hour
+                    hour=hour%12;
+                    hour=(hour*Math.PI/6)+
+                    (minute*Math.PI/(6*60))+
+                    (second*Math.PI/(360*60));
+                    drawHand(ctx, hour, radius*0.5, radius*0.07);
+                    //minute
+                    minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
+                    drawHand(ctx, minute, radius*0.8, radius*0.07);
+                    // second
+                    second=(second*Math.PI/30);
+                    drawHand(ctx, second, radius*0.9, radius*0.02);
+                }
+                
+                function drawHand(ctx, pos, length, width) {
+                    ctx.beginPath();
+                    ctx.lineWidth = width;
+                    ctx.lineCap = "round";
+                    ctx.moveTo(0,0);
+                    ctx.rotate(pos);
+                    ctx.lineTo(0, -length);
+                    ctx.stroke();
+                    ctx.rotate(-pos);
+                }
+                </script>
+                
+                </body>
+                </html>
     <center>
         <h1> ONLY FOR EDUCATIONAL PURSPOSES </h1>
-        <h1> FOR REMOVING ANY CONTENT MAIL HERE jitendraunatti@proton.me </h1>
+        <h1> FOR REMOVING ANY CONTENT MAIL HERE 𝗷𝗶𝘁𝗲𝗻𝗱𝗿𝗮𝘂𝗻𝗮𝘁𝘁𝗶@𝗽𝗿𝗼𝘁𝗼𝗻.𝗺𝗲</h1>
         
         <h2> FIRST YOU NEED TO  DOWNLOAD NETWORK STREAMER APP </h2>
         <center>
@@ -67,18 +250,19 @@ body {
                         <h1> QUALITY 144P  TO 1080p </h1>
                         <center>	
                     <iframe src="https://m.live4wap.click/embed.php" width="550" height="350"   frameborder="0" marginheight="0" marginwidth="0" scrolling="no" allowfullscreen replaced="true"></iframe>
-         
+                    <a class="buttoncss" href="https://t.me/storymemesmy""><h2> CLICK HERE FOR JOIN OUR TELEGRAM GROUP FOR 2K,4K60FPS LINK SOURCE SEVER LINK </h2></a><br> 
                     <h1><a href="https://jitendraunatti-pro-dev.unattiprakesh.workers.dev/
-                       ">MOVIE USER </a></h1>
+                       ">MOVIE USER CLICK HERE </a></h1>
         <center>
+
           <h1><i><span style="color: red;"> THIS FULL WEBSITE DESIGN</span></i></h1><h1><i><span style="color: red;">&nbsp;AND DEVELOP BY 𝕁𝕀𝕋𝔼ℕ𝔻ℝ𝔸 𝕂𝕌𝕄𝔸ℝ</span></i></h1></center></center></h4></center></h4></center></h4></center></h4></center></h4></center></h2><h2><center></center></h2><h4><center></center></h4><h4><center></center></h4><h4><center></center></h4><h4><center></center></h4><h4><center><center>
           <h1><br /></h1>
         <center>
         </center></center></center></h4></center></center></center></center></center></center></center>
         <h1 align="left ">ALL COPYRIGHT RESERVED STAR NETWORK AND DIGITAL PARTNER{NOVI DIGITALS} </h1>
         <h1 align="left ">ALL COPYRIGHT RESERVED STAR NETWORK AND DIGITAL PARTNER{JIO CINEMA} </h1>
-        <h1 align="right">𝕎𝔼𝔹𝕊𝕀𝕋𝔼 𝕍𝔼ℝ𝕊𝕀𝕆ℕ </h1>
-        <h1 align="right">𝕁𝕌𝕂𝟠.𝟙𝟘.𝟚𝟚.𝟝ℍ.𝕍𝟙</h1>
+        <h1 align="left">WEBSITE VERSION </h1>
+        <h1 align="left">𝕁𝕌𝕂𝟠.𝟙𝟘.𝟚𝟚.𝟝ℍ.𝟙.𝟝</h1>
 
 
 
